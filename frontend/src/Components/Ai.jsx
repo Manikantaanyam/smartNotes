@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { GEMINI_API } from "../config";
 
 const Ai = () => {
   const [question, setQuestion] = useState("");
@@ -7,7 +8,7 @@ const Ai = () => {
 
   const handleAi = async () => {
     const response = await axios({
-      url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyABH0u4ouQc7LRZOs7t-4tgwJ9yNxNzex8",
+      url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API}`,
       method: "post",
       data: { contents: [{ parts: [{ text: question }] }] },
     });
