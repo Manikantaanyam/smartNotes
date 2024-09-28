@@ -4,10 +4,12 @@ import { useState } from "react";
 import axios from "axios";
 import { getItem } from "./Session";
 import { ToastContainer, toast } from "react-toastify";
+import SideBar from "./SideBar";
 
 const Note = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
+
   const sessionValue = getItem("token");
   const parseSession = JSON.parse(sessionValue);
 
@@ -21,14 +23,16 @@ const Note = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${parseSession.msg.token}`,
+            Authorization: `Bearer ${parseSession.token}`,
           },
         }
       );
 
       toast.success(response.data.msg);
     } catch (e) {
-      toast.error(e.response.data.error);
+      console.log(e);
+
+      toast.error("error");
     }
   };
   const modules = {
@@ -38,7 +42,7 @@ const Note = () => {
       ["bold", "italic", "underline", "strike", "blockquote"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["link", "image", "video"],
-      ["clean"], // Removes all formatting
+      ["clean"],
     ],
   };
 
@@ -59,7 +63,8 @@ const Note = () => {
   ];
 
   return (
-    <div className="flex h-[90vh]  w-full  mt-2 space-x-3 p-3 ">
+    <div className="flex h-[90vh] w-full space-x-3 p-3 ">
+      <SideBar />
       <div className="flex flex-col gap-y-3 w-[55%]">
         <input
           type="text"
@@ -75,7 +80,7 @@ const Note = () => {
           onChange={setValue}
           modules={modules}
           formats={formats}
-          className="h-[90vh] overflow-scroll"
+          className="h-[60vh] overflow-scroll1 sticky top-0"
         />
 
         <button
