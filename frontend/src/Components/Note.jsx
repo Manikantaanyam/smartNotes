@@ -64,7 +64,6 @@ const Note = () => {
 
   return (
     <div className="flex  w-full space-x-3 p-3 ">
-      <SideBar />
       <div className="h-full flex flex-col gap-y-3 w-[55%]">
         <input
           type="text"
