@@ -26,7 +26,7 @@ const createNote = async (req, res) => {
 };
 
 const getNotes = async (req, res) => {
-  const notes = await Note.find();
+  const notes = await Note.find({ user: req.userId });
   return res.json({ notes });
 };
 

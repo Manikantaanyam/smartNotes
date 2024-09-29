@@ -8,6 +8,10 @@ const noteSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  created_At: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 const Note = mongoose.model("notes", noteSchema);

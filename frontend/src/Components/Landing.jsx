@@ -7,6 +7,7 @@ import Works from "./Works";
 const Landing = () => {
   return (
     <div>
+      <Header />
       <Hero />
       <Features />
       <Works />

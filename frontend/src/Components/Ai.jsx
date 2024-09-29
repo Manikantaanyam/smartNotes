@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { GEMINI_API } from "../config";
+import SideBar from "./SideBar";
 
 const Ai = () => {
   const [question, setQuestion] = useState("");
@@ -27,26 +28,41 @@ const Ai = () => {
   };
 
   return (
-    <div className="w-[60%] m-auto mt-2 border border-gray-200 shadow-lg relative">
-      <div
-        className=" p-4 overflow-y-scroll overflow-x-hidden h-[70vh]"
-        dangerouslySetInnerHTML={{ __html: answer }}
-      />
-
-      <div className="flex  p-3 justify-between  sticky bottom-0  ">
-        <input
-          type="text"
-          placeholder="ask doubt"
-          className="p-3 w-[50%] border"
-          onChange={(e) => setQuestion(e.target.value)}
+    <div className="flex  w-full space-x-3 p-3 ">
+      <div className="w-[60%] h-full m-auto mt-2 border  border-gray-300  relative">
+        <div
+          className=" p-10 overflow-y-scroll overflow-x-hidden h-[80vh]"
+          dangerouslySetInnerHTML={{ __html: answer }}
         />
-        <button
-          onClick={handleAi}
-          className="rounded-md p-3 bg-black text-white"
-        >
-          send
-        </button>
+
+        <div className="flex  p-3 justify-between  sticky bottom-0  ">
+          <input
+            type="text"
+            placeholder="ask doubt"
+            className="p-3 w-[80%] border border-gray-500"
+            onChange={(e) => setQuestion(e.target.value)}
+          />
+          <button
+            onClick={handleAi}
+            className="rounded-md p-3 bg-black text-white"
+          >
+            send
+          </button>
+        </div>
       </div>
+    </div>
+  );
+};
+
+export const Shimmer = () => {
+  return (
+    <div>
+      <div className="h-[20px] w-full bg-gray-400"></div> <br />
+      <div className="h-[20px] w-full bg-gray-400"></div> <br />
+      <div className="h-[20px] w-full bg-gray-400"></div> <br />
+      <div className="h-[20px] w-full bg-gray-400"></div> <br />
+      <div className="h-[20px] w-full bg-gray-400"></div> <br />
+      <div className="h-[20px] w-full bg-gray-400"></div> <br />
     </div>
   );
 };

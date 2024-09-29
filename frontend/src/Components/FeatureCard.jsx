@@ -13,8 +13,12 @@ const FeatureCard = ({ path, title, description }) => {
       >
         <path stroke-linecap="round" stroke-linejoin="round" d={path} />
       </svg>
-      <h3 className="font-semibold text-xl">{title}</h3>
-      <p className="text-gray-600 max-w-[300px] text-center">{description}</p>
+      <h3 className="font-semibold text-lg md:text-xl min-w-[300px] text-center">
+        {title}
+      </h3>
+      <p className="text-gray-600 min-w-[300px] md:min-w-[50px] text-center">
+        {description}
+      </p>
     </div>
   );
 };

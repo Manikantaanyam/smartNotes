@@ -49,7 +49,7 @@ const Form = ({ type }) => {
 
   return (
     <div className="flex items-center justify-center min-h-[500px] ">
-      <div className="bg-white  p-8 rounded-lg shadow-lg border w-full  max-w-md">
+      <div className="bg-white max-w-[300px] h-auto md:max-w-[400px] p-8 rounded-lg shadow-lg border w-full ">
         <form action="" onSubmit={handleAuth}>
           <h1 className="text-2xl text-center font-bold">{type}</h1>
           {type == "signup" ? (

@@ -19,7 +19,7 @@ const Note = () => {
         "http://localhost:3000/api/notes",
         {
           title,
-          content: JSON.stringify({ value }),
+          content: JSON.stringify(value),
         },
         {
           headers: {
@@ -63,9 +63,9 @@ const Note = () => {
   ];
 
   return (
-    <div className="flex h-[90vh] w-full space-x-3 p-3 ">
+    <div className="flex  w-full space-x-3 p-3 ">
       <SideBar />
-      <div className="flex flex-col gap-y-3 w-[55%]">
+      <div className="h-full flex flex-col gap-y-3 w-[55%]">
         <input
           type="text"
           placeholder="enter the title"
@@ -80,7 +80,7 @@ const Note = () => {
           onChange={setValue}
           modules={modules}
           formats={formats}
-          className="h-[60vh] overflow-scroll1 sticky top-0"
+          className="h-[70vh] overflow-scroll1 sticky top-0"
         />
 
         <button

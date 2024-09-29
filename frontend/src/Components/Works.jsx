@@ -2,9 +2,9 @@ import React from "react";
 
 const Works = () => {
   return (
-    <div className="h-[60vh] mt-10">
+    <div className=" mt-10 mb-10">
       <h1 className="text-3xl font-bold text-center">How it Works</h1>
-      <div className="flex">
+      <div className="flex flex-col justify-center items-center md:flex-row">
         <WorksCard
           no={1}
           title={"Start Taking Notes"}
@@ -33,12 +33,16 @@ const Works = () => {
 
 const WorksCard = ({ no, title, description }) => {
   return (
-    <div className="w-[33%] flex flex-col justify-center items-center gap-y-2 mt-12">
+    <div className="w-[33%] flex flex-col justify-center items-center gap-y-2 mt-12 ">
       <button className="rounded-full bg-black w-12 h-12 text-white font-bold">
         {no}
       </button>
-      <h2 className="text-xl font-semibold">{title}</h2>
-      <p className="text-gray-500 max-w-[300px] text-center">{description}</p>
+      <h2 className="text-lg font-semibold min-w-[300px] text-center md:text-xl">
+        {title}
+      </h2>
+      <p className="text-gray-500 min-w-[300px] md:min-w-[100px] text-center">
+        {description}
+      </p>
     </div>
   );
 };
