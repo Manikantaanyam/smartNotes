@@ -5,3 +5,7 @@ export const setInSession = (key, value) => {
 export const getItem = (key) => {
   return sessionStorage.getItem(key);
 };
+
+export const clearItem = () => {
+  return sessionStorage.clear();
+};

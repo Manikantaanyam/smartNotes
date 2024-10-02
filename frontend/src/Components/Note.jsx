@@ -14,6 +14,8 @@ const Note = () => {
   const parseSession = JSON.parse(sessionValue);
 
   const handleSubmit = async () => {
+    console.log(title, value);
+
     try {
       const response = await axios.post(
         "http://localhost:3000/api/notes",
@@ -63,33 +65,49 @@ const Note = () => {
   ];
 
   return (
-    <div className="flex  w-full space-x-3 p-3 ">
-      <div className="h-full flex flex-col gap-y-3 w-[55%]">
+    <div className="m-6 h-[480px] border w-[1000px] shadow-lg flex flex-col">
+      <div className="flex w-full border justify-between">
         <input
           type="text"
-          placeholder="enter the title"
-          className="border border-gray-300 p-2"
+          placeholder="Enter the title"
+          className=" bg-gray-100 w-full text-xl font-semibold border-gray-500 p-3 focus:outline-none"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
         />
+        <div
+          onClick={handleSubmit}
+          className="flex bg-blue-600 px-3 space-x-3 text-bold cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="w-6 text-white"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+            />
+          </svg>
+          <button className=" text-lg text-white ">save</button>
+        </div>
+      </div>
+      <div className="focus:outline-none">
         <ReactQuill
           theme="snow"
           value={value}
           onChange={setValue}
           modules={modules}
           formats={formats}
-          className="h-[70vh] overflow-scroll1 sticky top-0"
+          className="h-[383px]  focus:outline-none"
         />
-
-        <button
-          className=" mt-10 bg-black text-white p-3 cursor-pointer"
-          onClick={handleSubmit}
-        >
-          save
-        </button>
-        <ToastContainer />
       </div>
+
+      <ToastContainer />
     </div>
   );
 };
