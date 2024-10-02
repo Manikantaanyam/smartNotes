@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import Features from "./Features";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -8,6 +9,7 @@ const Landing = () => {
   return (
     <div>
       <Header />
+      <Outlet />
       <Hero />
       <Features />
       <Works />

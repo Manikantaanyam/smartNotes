@@ -1,33 +1,20 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { clickAtom } from "../Store/Atoms/NoteIdAtom";
+import { getItem } from "./Session";
 
 const DashHead = () => {
   const clickAtom1 = useRecoilValue(clickAtom);
+  const [input, setInput] = useState(false);
+  const user = getItem("token");
+  const parseUser = JSON.parse(user);
+  console.log(parseUser.username);
 
   return (
     <div className="flex flex-col w-full h-full ">
       <div className="flex items-center w-full py-8 justify-between h-[60px] bg-white shadow-md">
-        {clickAtom1 === "Create Note" || clickAtom1 === "Ai Assistance" ? (
-          <div className="flex space-x-5 p-4 ml-5 items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="w-10 font-bold"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-              />
-            </svg>
-            <p className="text-xl font-semibold">{clickAtom1}</p>
-          </div>
-        ) : (
+        {clickAtom1 === "Notes" ? (
           <div className="flex ml relative ml-5">
             {" "}
             <svg
@@ -50,6 +37,27 @@ const DashHead = () => {
               className="border border-gray-500 w-[400px] pl-12 p-3 rounded-full text-black"
             />
           </div>
+        ) : (
+          <div className="flex space-x-5 p-4 ml-5 items-center">
+            <Link to="/dashboard/">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-10 font-bold"
+                onClick={() => setInput((p) => !p)}
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                />
+              </svg>
+            </Link>
+            <p className="text-xl font-semibold">{clickAtom1}</p>
+          </div>
         )}
 
         <div className="flex space-x-8 mr-6 items-center">
@@ -68,7 +76,9 @@ const DashHead = () => {
             />
           </svg>
 
-          <button className="w-10 h-10 rounded-full bg-gray-500">M</button>
+          <button className="w-10 h-10 rounded-full text-white bg-rose-600 font-bold">
+            {parseUser.username[0]}
+          </button>
         </div>
       </div>
       <div>

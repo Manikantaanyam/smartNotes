@@ -66,7 +66,9 @@ const Notes = () => {
               className="w-[300px]  h-[200px] p-4 shadow-md border flex flex-col space-y-3"
               key={i._id}
             >
-              <h1 className="font-bold text-lg">{i.title}</h1>
+              <h1 className="font-semibold text-lg">
+                {i.title.slice(0, 25)}...
+              </h1>
               <p
                 className="text-gray-700 min-h-[50px]"
                 dangerouslySetInnerHTML={{
@@ -83,7 +85,7 @@ const Notes = () => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  className="w-5 cursor-pointer"
+                  className="w-5 cursor-pointer hover:text-blue-700"
                   onClick={() => {
                     setNoteIdAtom(i._id);
 
@@ -103,7 +105,7 @@ const Notes = () => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  className="w-5 cursor-pointer"
+                  className="w-5 cursor-pointer hover:text-blue-700"
                   onClick={() => {
                     handleDelete(i._id);
                   }}
@@ -120,7 +122,10 @@ const Notes = () => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  className="w-5 cursor-pointer"
+                  className="w-5 cursor-pointer  hover:text-blue-600"
+                  onClick={() => {
+                    alert("This Feature is not implemented yet");
+                  }}
                 >
                   <path
                     stroke-linecap="round"

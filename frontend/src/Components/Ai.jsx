@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { GEMINI_API } from "../config";
+import { useRecoilState } from "recoil";
+import { AiAnswer, AiQuestion } from "../Store/Atoms/NoteIdAtom";
 
 const Ai = () => {
+  const [aiPrompt, setAiPrompt] = useRecoilState(AiQuestion);
+  const [aiAnswer, setAiAnswer] = useRecoilState(AiAnswer);
   const [question, setQuestion] = useState("");
   const [prompt, setPrompt] = useState("");
   const [answer, setAnswer] = useState("");
@@ -10,15 +14,13 @@ const Ai = () => {
 
   const handleAi = async () => {
     setLoading(true);
-    setPrompt(question);
+    setAiPrompt(question);
 
     const response = await axios({
       url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API}`,
       method: "post",
       data: { contents: [{ parts: [{ text: question }] }] },
     });
-
-    console.log(response.data.candidates[0].content.parts[0].text);
 
     let rawanswer = response.data.candidates[0].content.parts[0].text;
 
@@ -31,18 +33,20 @@ const Ai = () => {
       .replace(/(.*?):/g, "<h1>$1:</h1>")
       .replace(/##\s*(.*)/g, "<h1>$1</h1>");
 
-    setAnswer(boldFormattedAnswer);
+    setAiAnswer(boldFormattedAnswer);
     setLoading(false);
   };
 
   return (
     <div className="relative w-[1000px] h-[480px] border m-6 shadow-md">
       <div className=" p-10 overflow-y-scroll overflow-x-hidden h-[420px] flex flex-col space-y-5">
-        {prompt ? (
+        {aiPrompt ? (
           <div className="flex">
-            <button className="w-10 h-10 rounded-full bg-gray-400">M</button>
+            <button className="w-10 h-10 rounded-full text-white font-bold bg-rose-600">
+              M
+            </button>
             <div className="p-2 text-[16px] w-[100%] rounded-full pl-4">
-              {prompt}
+              {aiPrompt}
             </div>
           </div>
         ) : null}
@@ -54,7 +58,10 @@ const Ai = () => {
             <hr className="w-full h-[25px] bg-gray-300" />
           </div>
         ) : (
-          <div className="" dangerouslySetInnerHTML={{ __html: answer }}></div>
+          <div
+            className=""
+            dangerouslySetInnerHTML={{ __html: aiAnswer }}
+          ></div>
         )}
       </div>
       <div className="flex justify-between p-3 absolute bottom-1 w-full">

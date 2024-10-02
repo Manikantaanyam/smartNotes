@@ -1,27 +1,27 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { getItem } from "./Session";
 import { ToastContainer, toast } from "react-toastify";
-import SideBar from "./SideBar";
-
+import { useRecoilState } from "recoil";
+import { ContentAtom, TitleAtom } from "../Store/Atoms/NoteIdAtom";
 const Note = () => {
-  const [value, setValue] = useState("");
-  const [title, setTitle] = useState("");
+  const [titleAtom, setTitleAtom] = useRecoilState(TitleAtom);
+  const [contentAtom, setContentAtom] = useRecoilState(ContentAtom);
+
+  useEffect(() => {}, []);
 
   const sessionValue = getItem("token");
   const parseSession = JSON.parse(sessionValue);
 
   const handleSubmit = async () => {
-    console.log(title, value);
-
     try {
       const response = await axios.post(
         "http://localhost:3000/api/notes",
         {
-          title,
-          content: JSON.stringify(value),
+          title: titleAtom,
+          content: JSON.stringify(contentAtom),
         },
         {
           headers: {
@@ -70,9 +70,10 @@ const Note = () => {
         <input
           type="text"
           placeholder="Enter the title"
+          value={titleAtom}
           className=" bg-gray-100 w-full text-xl font-semibold border-gray-500 p-3 focus:outline-none"
           onChange={(e) => {
-            setTitle(e.target.value);
+            setTitleAtom(e.target.value);
           }}
         />
         <div
@@ -99,8 +100,8 @@ const Note = () => {
       <div className="focus:outline-none">
         <ReactQuill
           theme="snow"
-          value={value}
-          onChange={setValue}
+          value={contentAtom}
+          onChange={setContentAtom}
           modules={modules}
           formats={formats}
           className="h-[383px]  focus:outline-none"
