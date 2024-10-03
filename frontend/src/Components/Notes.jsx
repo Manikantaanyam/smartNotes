@@ -1,12 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getItem } from "./Session";
-import SideBar from "./SideBar";
 import CreateButton from "./CreateButton";
 import { ToastContainer, toast } from "react-toastify";
-import { useSetRecoilState } from "recoil";
-import { NoteIdAtom } from "../Store/Atoms/NoteIdAtom";
-import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { NoteIdAtom, SearchAtom } from "../Store/Atoms/NoteIdAtom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Notes = () => {
   const [data1, setData1] = useState([]);
@@ -14,6 +13,13 @@ const Notes = () => {
   const parseSession = JSON.parse(sessionValue);
   const setNoteIdAtom = useSetRecoilState(NoteIdAtom);
   const navigate = useNavigate();
+  const searchAtom = useRecoilValue(SearchAtom);
+  console.log(searchAtom);
+
+  const noteFilter = data1.filter((note) =>
+    note.title.toLowerCase().includes(searchAtom.toLowerCase())
+  );
+  console.log(noteFilter);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -56,12 +62,19 @@ const Notes = () => {
 
   return (
     <div className="w-full h-full p-6 overflow-x-hidden ">
-      <div className="grid grid-cols-1 md:grid-cols-3   gap-y-5 border-none h-[450px] overflow-x-hidden overflow-y-scroll">
+      <div className=" grid grid-cols-1 md:grid-cols-3   gap-y-5 border-none h-[450px] overflow-x-hidden overflow-y-scroll">
         <CreateButton />
         {data1.length == 0 ? (
-          <CreateButton />
+          <div className="flex flex-col gap-3 justify-center items-center w-[1000px] ">
+            <p className="text-sm text-gray-500">You have no notes here</p>
+            <Link to="/dashboard/note">
+              <button className="bg-blue-600 p-3 rounded-md text-white font-semibold">
+                Create Note
+              </button>
+            </Link>
+          </div>
         ) : (
-          data1.map((i) => (
+          noteFilter.map((i) => (
             <div
               className="w-[300px]  h-[200px] p-4 shadow-md border flex flex-col space-y-3"
               key={i._id}
@@ -78,7 +91,31 @@ const Notes = () => {
               <p className="text-gray-700">
                 {new Date(i.created_At).toLocaleString()}
               </p>
-              <div className="flex space-x-4 relative  left-44 bottom-0">
+              <div className="flex space-x-4 relative  left-32 bottom-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="w-5 hover:text-blue-700 cursor-pointer"
+                  onClick={() => {
+                    setNoteIdAtom(i._id);
+                    navigate("/dashboard/view");
+                  }}
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

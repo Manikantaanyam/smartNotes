@@ -3,14 +3,16 @@ import axios from "axios";
 import { GEMINI_API } from "../config";
 import { useRecoilState } from "recoil";
 import { AiAnswer, AiQuestion } from "../Store/Atoms/NoteIdAtom";
+import { getItem } from "./Session";
 
 const Ai = () => {
   const [aiPrompt, setAiPrompt] = useRecoilState(AiQuestion);
   const [aiAnswer, setAiAnswer] = useRecoilState(AiAnswer);
   const [question, setQuestion] = useState("");
-  const [prompt, setPrompt] = useState("");
-  const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState();
+
+  const user = getItem("token");
+  const parseUsername = JSON.parse(user);
 
   const handleAi = async () => {
     setLoading(true);
@@ -34,6 +36,7 @@ const Ai = () => {
       .replace(/##\s*(.*)/g, "<h1>$1</h1>");
 
     setAiAnswer(boldFormattedAnswer);
+
     setLoading(false);
   };
 
@@ -43,7 +46,7 @@ const Ai = () => {
         {aiPrompt ? (
           <div className="flex">
             <button className="w-10 h-10 rounded-full text-white font-bold bg-rose-600">
-              M
+              {parseUsername.username.toUpperCase()[0]}
             </button>
             <div className="p-2 text-[16px] w-[100%] rounded-full pl-4">
               {aiPrompt}

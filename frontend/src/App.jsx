@@ -8,6 +8,8 @@ import Ai from "./Components/Ai";
 import Notes from "./Components/Notes";
 import DashBoard from "./Components/DashBoard";
 import Edit from "./Components/Edit";
+import ViewNote from "./Components/ViewNote";
+import Protected from "./Components/Protected";
 
 const App = () => {
   return (
@@ -17,11 +19,54 @@ const App = () => {
           <Route path="/signup" element={<Form type={"signup"} />} />
           <Route path="/login" element={<Form type={"login"} />} />
         </Route>
-        <Route path="/dashboard" element={<DashBoard />}>
-          <Route path="/dashboard/note" element={<Note />} />
-          <Route path="/dashboard/" element={<Notes />} />
-          <Route path="/dashboard/Aiassistant" element={<Ai />} />
-          <Route path="/dashboard/edit" element={<Edit />} />
+        <Route
+          path="/dashboard"
+          element={
+            <Protected>
+              <DashBoard />
+            </Protected>
+          }
+        >
+          <Route
+            path="/dashboard/note"
+            element={
+              <Protected>
+                <Note />
+              </Protected>
+            }
+          />
+          <Route
+            path="/dashboard/"
+            element={
+              <Protected>
+                <Notes />
+              </Protected>
+            }
+          />
+          <Route
+            path="/dashboard/Aiassistant"
+            element={
+              <Protected>
+                <Ai />
+              </Protected>
+            }
+          />
+          <Route
+            path="/dashboard/edit"
+            element={
+              <Protected>
+                <Edit />
+              </Protected>
+            }
+          />
+          <Route
+            path="/dashboard/view"
+            element={
+              <Protected>
+                <ViewNote />
+              </Protected>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

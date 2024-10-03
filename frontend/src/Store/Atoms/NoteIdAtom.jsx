@@ -29,3 +29,13 @@ export const AiAnswer = atom({
   key: "AiAnswer",
   default: "",
 });
+
+export const ActiveLink = atom({
+  key: "ActiveLink",
+  default: 1,
+});
+
+export const SearchAtom = atom({
+  key: "SearchAtom",
+  default: "",
+});

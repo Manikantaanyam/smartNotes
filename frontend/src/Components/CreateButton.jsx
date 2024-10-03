@@ -1,9 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useSetRecoilState } from "recoil";
+import { ContentAtom, TitleAtom } from "../Store/Atoms/NoteIdAtom";
 const CreateButton = () => {
+  const setTitleAtom = useSetRecoilState(TitleAtom);
+  const setContentAtom = useSetRecoilState(ContentAtom);
   return (
-    <div className="absolute right-8 bottom-8">
+    <div
+      onClick={() => {
+        setTitleAtom("");
+        setContentAtom("");
+      }}
+      className="absolute right-4 bottom-8 z-10"
+    >
       <Link to={"/dashboard/note"}>
         <button className="w-14 h-14 flex items-center justify-center cursor-pointer  rounded-full  bg-blue-700 font-bold text-white text-4xl hover:bg-blue-900">
           <svg

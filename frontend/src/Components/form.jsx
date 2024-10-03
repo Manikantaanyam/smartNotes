@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
-import { Link, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { setInSession } from "./Session";
+import { getItem, setInSession } from "./Session";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,6 +33,9 @@ const Form = ({ type }) => {
       setInSession("token", JSON.stringify(response.data));
       console.log(response.data);
       toast.success("Done");
+      if (response.data.token) {
+        navigate("/dashboard/");
+      }
     } catch (e) {
       const errorMsg = e.response.data.msg;
 

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { clearItem } from "./Session";
-import { useSetRecoilState } from "recoil";
-import { clickAtom } from "../Store/Atoms/NoteIdAtom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { ActiveLink, clickAtom } from "../Store/Atoms/NoteIdAtom";
 
 const SideBar = () => {
-  const [activeLink, setActiveLink] = useState(null);
+  const [activeLink, setActiveLink] = useRecoilState(ActiveLink);
   const [name, setName] = useState("");
   const setClickAtom = useSetRecoilState(clickAtom);
 
@@ -35,7 +35,9 @@ const SideBar = () => {
             key={index}
             to={link.to}
             className={`font-semibold flex gap-x-3 items-center text-lg p-2  ${
-              activeLink === index ? "bg-blue-500" : "hover:bg-gray-400"
+              activeLink === "Notes" || activeLink === index
+                ? "bg-blue-500"
+                : "hover:bg-gray-400"
             }`}
             onClick={() => {
               setActiveLink(index);

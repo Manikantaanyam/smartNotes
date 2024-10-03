@@ -1,20 +1,27 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { clickAtom } from "../Store/Atoms/NoteIdAtom";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { ActiveLink, clickAtom, SearchAtom } from "../Store/Atoms/NoteIdAtom";
 import { getItem } from "./Session";
 
 const DashHead = () => {
-  const clickAtom1 = useRecoilValue(clickAtom);
-  const [input, setInput] = useState(false);
+  const location = useLocation();
+  const setSearchAtom = useSetRecoilState(SearchAtom);
+  const [activeLink, setActiveLink] = useRecoilState(ActiveLink);
+  const [clickAtom1, setClickAtom1] = useRecoilState(clickAtom);
+
   const user = getItem("token");
   const parseUser = JSON.parse(user);
-  console.log(parseUser.username);
+
+  if (location.pathname == "/dashboard/note") {
+    setActiveLink(0);
+    setClickAtom1("Create Note");
+  }
 
   return (
     <div className="flex flex-col w-full h-full ">
       <div className="flex items-center w-full py-8 justify-between h-[60px] bg-white shadow-md">
-        {clickAtom1 === "Notes" ? (
+        {activeLink === 1 ? (
           <div className="flex ml relative ml-5">
             {" "}
             <svg
@@ -32,9 +39,10 @@ const DashHead = () => {
               />
             </svg>
             <input
+              onChange={(e) => setSearchAtom(e.target.value)}
               type="text"
               placeholder="search.."
-              className="border border-gray-500 w-[400px] pl-12 p-3 rounded-full text-black"
+              className="border border-gray-500 w-[400px] pl-12 p-3 rounded-full text-black focus:outline-none"
             />
           </div>
         ) : (
@@ -47,7 +55,9 @@ const DashHead = () => {
                 stroke-width="1.5"
                 stroke="currentColor"
                 className="w-10 font-bold"
-                onClick={() => setInput((p) => !p)}
+                onClick={() => {
+                  setActiveLink(1);
+                }}
               >
                 <path
                   stroke-linecap="round"
@@ -77,7 +87,7 @@ const DashHead = () => {
           </svg>
 
           <button className="w-10 h-10 rounded-full text-white bg-rose-600 font-bold">
-            {parseUser.username[0]}
+            {parseUser.username.toUpperCase()[0]}
           </button>
         </div>
       </div>
