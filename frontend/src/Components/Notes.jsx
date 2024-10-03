@@ -19,7 +19,7 @@ const Notes = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/notes", {
+        const response = await axios.get("https://smartnotes-o2e5.onrender.com/api/notes", {
           headers: {
             Authorization: `Bearer ${parseSession.token}`,
           },
@@ -43,7 +43,7 @@ const Notes = () => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/notes`,
+        `https://smartnotes-o2e5.onrender.com/api/notes`,
 
         {
           params: { id: note_id },

@@ -18,7 +18,7 @@ const Edit = () => {
 
   useEffect(() => {
     const handleEdit = async () => {
-      const respose = await axios.get(`http://localhost:3000/api/notes/${id}`, {
+      const respose = await axios.get(`https://smartnotes-o2e5.onrender.com/api/notes/${id}`, {
         headers: {
           Authorization: `Bearer ${parseSession.token}`,
         },
@@ -34,7 +34,7 @@ const Edit = () => {
   const handleUpdate = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/notes/${id}`,
+        `hhttps://smartnotes-o2e5.onrender.com/api/notes/${id}`,
         {
           title,
           content: JSON.stringify(content),

@@ -15,7 +15,7 @@ const Note = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/notes",
+        "https://smartnotes-o2e5.onrender.com/api/notes",
         {
           title: titleAtom,
           content: JSON.stringify(contentAtom),

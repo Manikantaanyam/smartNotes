@@ -22,7 +22,7 @@ const Form = ({ type }) => {
     try {
       e.preventDefault();
       const response = await axios.post(
-        `http://localhost:3000/api/auth/${type}`,
+        `https://smartnotes-o2e5.onrender.com/api/auth/${type}`,
         {
           username,
           email,

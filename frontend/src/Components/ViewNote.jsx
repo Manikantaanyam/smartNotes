@@ -16,7 +16,7 @@ const ViewNote = () => {
 
   useEffect(() => {
     const handleEdit = async () => {
-      const respose = await axios.get(`http://localhost:3000/api/notes/${id}`, {
+      const respose = await axios.get(`https://smartnotes-o2e5.onrender.com/api/notes/${id}`, {
         headers: {
           Authorization: `Bearer ${parseSession.token}`,
         },
