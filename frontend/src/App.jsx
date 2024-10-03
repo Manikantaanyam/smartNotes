@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-
 import Landing from "./Components/Landing";
 import Form from "./Components/form";
 import Note from "./Components/Note";
@@ -10,8 +9,21 @@ import DashBoard from "./Components/DashBoard";
 import Edit from "./Components/Edit";
 import ViewNote from "./Components/ViewNote";
 import Protected from "./Components/Protected";
+import { useRecoilState } from "recoil";
+import { TokenAtom } from "./Store/Atoms/NoteIdAtom";
+import { getItem } from "./Components/Session";
 
 const App = () => {
+  const [tokenAtom, setTokenAtom] = useRecoilState(TokenAtom);
+
+  useEffect(() => {
+    const token = getItem("token");
+    const parseToken = JSON.parse(token);
+    if (parseToken) {
+      setTokenAtom(parseToken.token);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

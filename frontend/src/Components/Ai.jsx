@@ -41,7 +41,7 @@ const Ai = () => {
   };
 
   return (
-    <div className="relative w-[1000px] h-[480px] border m-6 shadow-md">
+    <div className="bg-gray-600 text-white relative w-[1000px] h-[480px] border m-6 shadow-md">
       <div className=" p-10 overflow-y-scroll overflow-x-hidden h-[420px] flex flex-col space-y-5">
         {aiPrompt ? (
           <div className="flex">
@@ -56,9 +56,9 @@ const Ai = () => {
 
         {loading ? (
           <div className="flex flex-col space-y-4">
-            <hr className="w-full h-[25px] bg-gray-300" />
-            <hr className="w-full h-[25px] bg-gray-300" />
-            <hr className="w-full h-[25px] bg-gray-300" />
+            <hr className="w-full h-[25px] bg-gray-300 animate-pulse" />
+            <hr className="w-full h-[25px] bg-gray-300 animate-pulse" />
+            <hr className="w-full h-[25px] bg-gray-300 animate-pulse" />
           </div>
         ) : (
           <div
@@ -71,7 +71,7 @@ const Ai = () => {
         <input
           type="text"
           placeholder="Ask Doubts.."
-          className="border w-full p-3 text-md  focus:outline-none"
+          className="border w-full p-3 text-md text-black  focus:outline-none"
           onChange={(e) => setQuestion(e.target.value)}
         />
         <div

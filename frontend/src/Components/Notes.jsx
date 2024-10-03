@@ -9,17 +9,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Notes = () => {
   const [data1, setData1] = useState([]);
+
   const sessionValue = getItem("token");
   const parseSession = JSON.parse(sessionValue);
   const setNoteIdAtom = useSetRecoilState(NoteIdAtom);
   const navigate = useNavigate();
   const searchAtom = useRecoilValue(SearchAtom);
-  console.log(searchAtom);
-
-  const noteFilter = data1.filter((note) =>
-    note.title.toLowerCase().includes(searchAtom.toLowerCase())
-  );
-  console.log(noteFilter);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -38,6 +33,10 @@ const Notes = () => {
 
     fetchNotes();
   }, []);
+
+  const noteFilter = data1.filter((note) =>
+    note.title.toLowerCase().includes(searchAtom.toLowerCase())
+  );
 
   const handleDelete = async (note_id) => {
     console.log(note_id);

@@ -1,17 +1,13 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { getItem } from "./Session";
 import { ToastContainer, toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 import { ContentAtom, TitleAtom } from "../Store/Atoms/NoteIdAtom";
-import CreateButton from "./CreateButton";
 const Note = () => {
   const [titleAtom, setTitleAtom] = useRecoilState(TitleAtom);
   const [contentAtom, setContentAtom] = useRecoilState(ContentAtom);
-
-  useEffect(() => {}, []);
 
   const sessionValue = getItem("token");
   const parseSession = JSON.parse(sessionValue);
@@ -86,13 +82,13 @@ const Note = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="2.0"
+            strokeWidth="2.0"
             stroke="currentColor"
-            className="size-6 text-center"
+            className="size-6 text-center cursor-pointer"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
             />
           </svg>
@@ -105,13 +101,13 @@ const Note = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="w-6 text-white"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
             />
           </svg>

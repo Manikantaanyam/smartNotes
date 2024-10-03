@@ -39,3 +39,8 @@ export const SearchAtom = atom({
   key: "SearchAtom",
   default: "",
 });
+
+export const TokenAtom = atom({
+  key: "TokenAtom",
+  default: null,
+});
